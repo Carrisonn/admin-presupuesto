@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Type" content="text/html">
+  <meta name="description" content="Administrador de Presupuesto">
+  <link rel="icon" href="src/icons/icon-app.svg" type="svg/svg+xml">
+  <title>Administrador de Presupuesto</title>
+  <link rel="preload" href="src/css/normalize.css" as="style">
+  <link rel="stylesheet" href="src/css/normalize.css">
+  <link rel="preload" href="src/css/style.css" as="style">
+  <link rel="stylesheet" href="src/css/style.css">
+</head>
+
+<body>
+  <main>
+    <div class="container">
+      <h1>Gasto Semanal</h1>
+
+      <div class="content-container">
+        <div>
+          <h2 class="subtitle">Añade tus gastos aqui</h2>
+
+          <form id="form">
+            <div class="form-field">
+              <label for="name">Gasto:</label>
+              <input type="text" id="name" name="name" placeholder="Nombre del gasto">
+            </div>
+            <div class="form-field">
+              <label for="amount">Cantidad:</label>
+              <input type="text" id="amount" name="amount" placeholder="Cantidad en $">
+            </div>
+
+            <div>
+              <button class="btn" type="submit">Añadir</button>
+            </div>
+          </form>
+        </div>
+
+        <div>
+          <h2 class="subtitle">Listado de gastos</h2>
+
+          <div class="div-expense">
+            <div class="div-expense-budget">
+              <p class="budget">Presupuesto: $</p>
+            </div>
+            <div class="div-expense-remaining">
+              <p class="remaining">Restante: $</p>
+            </div>
+          </div>
+
+        </div>
+      </div> <!-- content-container -->
+    </div>
+  </main>
+</body>
+
+</html>
