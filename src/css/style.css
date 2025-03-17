@@ -4,8 +4,8 @@
   --color-blue: #4747ff;
   --color-grey: #acacac;
 
-  --color-buget: #56abf1;
-  --color-remaining: rgb(96, 172, 96);
+  --color-buget: #85c2f5;
+  --color-remaining: #98db98;
 }
 
 html {
@@ -47,16 +47,17 @@ h1 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
-  border: 1px solid #000;
   padding: 1rem;
   background-color: var(--color-white);
   border-radius: 2rem;
+  box-shadow: 0px 5px 10px 5px rgba(0, 0, 0, 0.75);
 }
 
 .subtitle {
   font-size: 3rem;
   color: var(--color-blue);
   font-weight: 400;
+
 }
 
 #form {
@@ -103,13 +104,14 @@ h1 {
 .div-expense-budget {
   text-align: left;
   padding: 2rem;
-  background-color: #56abf1;
+  background-color: #85c2f5;
   border-radius: 0.5rem;
 }
 
 .budget {
-  color: var(--color-white);
+  color: #4343dd;
   font-size: 1.8rem;
+  font-weight: 700;
 }
 
 .div-expense-remaining {
@@ -120,6 +122,19 @@ h1 {
 }
 
 .remaining {
-  color: var(--color-white);
+  color: #0c640c;
   font-size: 1.8rem;
+  font-weight: 700;
+}
+
+/** Mobile **/
+@media screen and (max-width: 768px) {
+  .content-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .subtitle {
+    margin-bottom: 0;
+  }
 }
