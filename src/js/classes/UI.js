@@ -1,4 +1,5 @@
-import { spanBudget, spanRemaining, form } from '../constants.js';
+import { spanBudget, spanRemaining, form, divExpenseContainer, divUserExpenseContainer, divExpenseRemaining } from '../constants.js';
+import { deleteExpense } from '../functions.js';
 
 export class UI {
   constructor() { }
@@ -7,7 +8,14 @@ export class UI {
     const { budget, remaining } = budgetObj;
     spanBudget.textContent = budget;
     spanRemaining.textContent = remaining;
+    //this.checkBudget(budgetObj);
   }
+
+  //checkBudget(budgetObj) {
+  //  const { budget, remaining } = budgetObj;
+  //
+  //  if ((budget / 4) > remaining) return divExpenseRemaining.style = 'background-color: #e59c9c';
+  //}
 
   showNotification(message, type) {
     const notification = document.createElement('p');
@@ -22,13 +30,38 @@ export class UI {
     setTimeout(() => notification.remove(), 4000);
   }
 
-  //showExpenses(expenses) {
-  //  expenses.forEach(expenseObj => {
-  //    const { expense, amount } = expenseObj;
-  //    console.log(expense, amount);
-  //  });
-  //
-  //
-  //  Object.assign(userInfoObj, { expense: '', amount: '' });
-  //}
+  showExpenses(expenses) {
+    while (divUserExpenseContainer.firstChild) {
+      divUserExpenseContainer.removeChild(divUserExpenseContainer.firstChild);
+    }
+
+    if (expenses.length !== 0) divUserExpenseContainer.innerHTML = '<h2 class="subtitle">Tus gastos</h2>';
+
+    expenses.forEach(expense => {
+      const { expenseName, expenseAmount, id } = expense;
+
+      const expenseNameFormatted = expenseName.replace(/^(.)/, char => char.toUpperCase());
+
+      const divUserExpense = document.createElement('div');
+      divUserExpense.classList.add('div-user-expense');
+
+      const userExpense = document.createElement('p');
+      userExpense.classList.add('user-expense');
+      userExpense.textContent = `${expenseNameFormatted}: $${expenseAmount}`;
+
+      const btnDelete = document.createElement('button');
+      btnDelete.classList.add('btn-delete');
+      btnDelete.textContent = 'Eliminar';
+      btnDelete.addEventListener('click', () => deleteExpense(id));
+
+      divUserExpense.appendChild(userExpense);
+      divUserExpense.appendChild(btnDelete);
+      divUserExpenseContainer.appendChild(divUserExpense);
+      divExpenseContainer.appendChild(divUserExpenseContainer);
+
+      this.showNotification('Gasto agregado correctamente', 'success');
+      Object.assign(expenses, { expenseName: '', expenseAmount: 0 });
+      form.reset();
+    });
+  }
 }
