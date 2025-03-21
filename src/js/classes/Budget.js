@@ -1,23 +1,33 @@
 import { UI } from './UI.js';
-import { spanRemaining, form } from '../constants.js';
 
 const ui = new UI();
 
 export class Budget {
   constructor(budget) {
-    this.budget = budget;
-    this.remaining = budget;
+    this.budget = Number(budget);
+    this.remaining = Number(budget);
     this.expenses = [];
   }
 
   addExpense(userInfoObj) {
-    const { amount } = userInfoObj;
-    this.remaining -= amount;
-    spanRemaining.textContent = this.remaining;
     this.expenses = [...this.expenses, userInfoObj];
-    ui.showExpenses(this.expenses);
+    this.calculateRemaining();
+  }
 
-    ui.showNotification('Cantidad restante actualizada', 'success');
-    form.reset();
+  deleteExpense(id) {
+    this.expenses = this.expenses.filter(expense => expense.id !== id);
+    this.calculateRemaining();
+  }
+
+  calculateRemaining() {
+    if (this.expenses.length === 0) {
+      this.remaining = this.budget;
+    } else {
+      const expensed = this.expenses.reduce((acc, curr) => acc + curr.expenseAmount, 0);
+      this.remaining = this.budget - expensed;
+    }
+
+    ui.addBudgetToHTML(this);
+    ui.showExpenses(this.expenses);
   }
 }
