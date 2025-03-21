@@ -26,3 +26,9 @@ export function validateUserInfo(event) {
   const userInfoObj = { expenseName, expenseAmount, id: Date.now() };
   budget.addExpense(userInfoObj);
 }
+
+export function deleteExpense(id) {
+  budget.deleteExpense(id);
+  const { expenses } = budget;
+  ui.showExpenses(expenses);
+}
