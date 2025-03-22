@@ -12,11 +12,13 @@ export class Budget {
   addExpense(userInfoObj) {
     this.expenses = [...this.expenses, userInfoObj];
     this.calculateRemaining();
+    ui.showNotification('Gasto agregado correctamente', 'success');
   }
 
   deleteExpense(id) {
     this.expenses = this.expenses.filter(expense => expense.id !== id);
     this.calculateRemaining();
+    ui.showNotification('Gasto eliminado correctamente', 'success');
   }
 
   calculateRemaining() {
