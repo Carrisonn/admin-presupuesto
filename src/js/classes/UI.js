@@ -8,14 +8,27 @@ export class UI {
     const { budget, remaining } = budgetObj;
     spanBudget.textContent = budget;
     spanRemaining.textContent = remaining;
-    //this.checkBudget(budgetObj);
+    this.checkRemaining(budgetObj);
   }
 
-  //checkBudget(budgetObj) {
-  //  const { budget, remaining } = budgetObj;
-  //
-  //  if ((budget / 4) > remaining) return divExpenseRemaining.style = 'background-color: #e59c9c';
-  //}
+  checkRemaining(budgetObj) {
+    const { budget, remaining } = budgetObj;
+
+    switch (true) {
+      case (budget / 4) > remaining:
+        divExpenseRemaining.classList.remove('default-color-remaining', 'mid-color-remaining');
+        divExpenseRemaining.classList.add('low-color-remaining');
+        break;
+      case (budget / 2) > remaining:
+        divExpenseRemaining.classList.remove('default-color-remaining', 'low-color-remaining');
+        divExpenseRemaining.classList.add('mid-color-remaining');
+        break;
+      default:
+        divExpenseRemaining.classList.remove('default-color-remaining', 'low-color-remaining', 'mid-color-remaining');
+        divExpenseRemaining.classList.add('default-color-remaining');
+        break;
+    }
+  }
 
   showNotification(message, type) {
     const notification = document.createElement('p');
@@ -58,10 +71,7 @@ export class UI {
       divUserExpense.appendChild(btnDelete);
       divUserExpenseContainer.appendChild(divUserExpense);
       divExpenseContainer.appendChild(divUserExpenseContainer);
-
-      this.showNotification('Gasto agregado correctamente', 'success');
-      Object.assign(expenses, { expenseName: '', expenseAmount: 0 });
-      form.reset();
     });
+    form.reset();
   }
 }
