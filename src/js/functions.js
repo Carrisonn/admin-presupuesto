@@ -22,7 +22,7 @@ export function validateUserInfo(event) {
   const expenseAmount = Number(document.querySelector('#amount').value.trim());
 
   if (expenseName === '' || expenseAmount === 0) return ui.showNotification('Ambos campos son obligatorios', 'error');
-  if (expenseAmount < 0) return ui.showNotification('Cantidad no válida', 'error');
+  if (expenseAmount < 0 || isNaN(expenseAmount)) return ui.showNotification('Cantidad no válida', 'error');
   const userInfoObj = { expenseName, expenseAmount, id: Date.now() };
   budget.addExpense(userInfoObj);
 }
