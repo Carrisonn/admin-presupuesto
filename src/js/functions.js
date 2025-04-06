@@ -29,6 +29,4 @@ export function validateUserInfo(event) {
 
 export function deleteExpense(id) {
   budget.deleteExpense(id);
-  const { expenses } = budget;
-  ui.showExpenses(expenses);
 }
