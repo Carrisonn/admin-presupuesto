@@ -2,11 +2,12 @@ import { Budget } from './classes/Budget.js';
 import { UI } from './classes/UI.js';
 
 const ui = new UI();
-let budget;
+export let budget;
 
 export function askBudget() {
-  const userBudget = prompt('¿Cuál es tu presupuesto?');
-  if (Number(userBudget) <= 0 || userBudget === null || isNaN(userBudget)) {
+  const userBudget = Number(prompt('¿Cuál es tu presupuesto?'));
+  const isInvalidBudget = userBudget <= 0 || userBudget === null || isNaN(userBudget);
+  if (isInvalidBudget) {
     alert('Debes ingresar un presupuesto válido');
     return askBudget();
   }
@@ -25,8 +26,4 @@ export function validateUserInfo(event) {
   if (expenseAmount < 0 || isNaN(expenseAmount)) return ui.showNotification('Cantidad no válida', 'error');
   const userInfoObj = { expenseName, expenseAmount, id: Date.now() };
   budget.addExpense(userInfoObj);
-}
-
-export function deleteExpense(id) {
-  budget.deleteExpense(id);
 }

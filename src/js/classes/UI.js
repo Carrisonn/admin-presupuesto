@@ -1,5 +1,5 @@
 import { spanBudget, spanRemaining, form, divExpenseContainer, divUserExpenseContainer, divExpenseRemaining } from '../constants.js';
-import { deleteExpense } from '../functions.js';
+import { budget } from '../functions.js';
 
 export class UI {
   constructor() { }
@@ -65,7 +65,7 @@ export class UI {
       const btnDelete = document.createElement('button');
       btnDelete.classList.add('btn-delete');
       btnDelete.textContent = 'Eliminar';
-      btnDelete.addEventListener('click', () => deleteExpense(id));
+      btnDelete.addEventListener('click', () => budget.deleteExpense(id));
 
       divUserExpense.appendChild(userExpense);
       divUserExpense.appendChild(btnDelete);
